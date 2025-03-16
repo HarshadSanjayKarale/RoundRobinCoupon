@@ -27,7 +27,7 @@ const AdminDashboard = () => {
       setLoading(true);
       const token = localStorage.getItem('adminToken');
       
-      const res = await axios.get('http://localhost:5000/admin/coupons', {
+      const res = await axios.get('https://roundrobincoupon.onrender.com/admin/coupons', {
         headers: {
           'x-access-token': token
         }
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('adminToken');
       
-      await axios.post('http://localhost:5000/admin/add-coupon', 
+      await axios.post('https://roundrobincoupon.onrender.com/admin/add-coupon', 
         { code: newCouponCode },
         { headers: { 'x-access-token': token } }
       );
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('adminToken');
       
-      await axios.patch('http://localhost:5000/admin/update-coupon', 
+      await axios.patch('https://roundrobincoupon.onrender.com/admin/update-coupon', 
         { 
           coupon_id: editingCoupon._id,
           code: editingCoupon.code 
@@ -103,7 +103,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('adminToken');
       
-      await axios.patch('http://localhost:5000/admin/toggle-coupon',
+      await axios.patch('https://roundrobincoupon.onrender.com/admin/toggle-coupon',
         { coupon_id: couponId },
         { headers: { 'x-access-token': token } }
       );
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('adminToken');
       
-      await axios.delete('http://localhost:5000/admin/delete-coupon', {
+      await axios.delete('https://roundrobincoupon.onrender.com/admin/delete-coupon', {
         headers: { 'x-access-token': token },
         data: { coupon_id: couponId }
       });

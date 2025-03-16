@@ -24,7 +24,7 @@ const UserClaims = () => {
       setLoading(true);
       const token = localStorage.getItem('adminToken');
       
-      const res = await axios.get('http://localhost:5000/admin/claims', {
+      const res = await axios.get('https://roundrobincoupon.onrender.com/admin/claims', {
         headers: {
           'x-access-token': token
         }

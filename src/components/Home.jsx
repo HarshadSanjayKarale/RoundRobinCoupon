@@ -50,7 +50,7 @@ const Home = () => {
       console.log('Using session ID for request:', currentSessionId);
       
       // Use the currentSessionId directly in the request rather than the state variable
-      const res = await axios.post('http://localhost:5000/claim-coupon', 
+      const res = await axios.post('https://roundrobincoupon.onrender.com/claim-coupon', 
         { sessionId: currentSessionId },
         { withCredentials: true }
       );

@@ -23,7 +23,7 @@ const AdminLogin = () => {
     setLoading(true);
     
     try {
-      const res = await axios.post('http://localhost:5000/admin/login', {
+      const res = await axios.post('https://roundrobincoupon.onrender.com/admin/login', {
         username,
         password
       });

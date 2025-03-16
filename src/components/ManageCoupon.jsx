@@ -32,7 +32,7 @@ const ManageCoupon = () => {
       setLoading(true);
       const token = localStorage.getItem('adminToken');
       
-      const res = await axios.get(`http://localhost:5000/admin/coupons`, {
+      const res = await axios.get(`https://roundrobincoupon.onrender.com/admin/coupons`, {
         headers: {
           'x-access-token': token
         }
@@ -73,7 +73,7 @@ const ManageCoupon = () => {
       
       if (isEditing) {
         // Update existing coupon
-        await axios.patch('http://localhost:5000/admin/update-coupon', 
+        await axios.patch('https://roundrobincoupon.onrender.com/admin/update-coupon', 
           { 
             coupon_id: id,
             code: couponCode 
@@ -83,7 +83,7 @@ const ManageCoupon = () => {
         setSuccess('Coupon updated successfully');
       } else {
         // Add new coupon
-        await axios.post('http://localhost:5000/admin/add-coupon', 
+        await axios.post('https://roundrobincoupon.onrender.com/admin/add-coupon', 
           { code: couponCode },
           { headers: { 'x-access-token': token } }
         );
