@@ -73,46 +73,8 @@ const Home = () => {
           Efficiently distribute and claim coupons with our cutting-edge system designed for seamless experiences.
         </p>
       </div>
-
-      {/* Feature Sections */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* How It Works Section */}
-          <div className="bg-gray-200 rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-bold mb-6">How It Works</h2>
-            <p className="text-gray-700 mb-6">
-              Our system employs a unique round-robin method to ensure fair distribution of coupons among users. 
-              Sign up, browse available coupons, and claim your favorites with ease.
-            </p>
-            <div className="flex justify-center">
-              <img 
-                src="https://via.placeholder.com/300x200/1a2533/FFFFFF?text=Coupon+Distribution" 
-                alt="How It Works" 
-                className="rounded-lg" 
-              />
-            </div>
-          </div>
-
-          {/* Benefits Section */}
-          <div className="bg-gray-200 rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl font-bold mb-6">Benefits</h2>
-            <ul className="list-disc list-inside space-y-2 mb-6">
-              <li className="text-gray-700">Fair distribution of coupons</li>
-              <li className="text-gray-700">Easy to use interface</li>
-              <li className="text-gray-700">Wide variety of coupons</li>
-            </ul>
-            <div className="flex justify-center">
-              <img 
-                src="https://via.placeholder.com/300x200/1a2533/FFFFFF?text=Benefits" 
-                alt="Benefits" 
-                className="rounded-lg" 
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Claim Coupon Button */}
-        <div className="text-center mt-12">
+      {/* Claim Coupon Button */}
+      <div className="text-center mt-12">
           <button
             onClick={claimCoupon}
             disabled={loading}
@@ -122,28 +84,92 @@ const Home = () => {
           </button>
           
           {response && (
-            <div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-              <h2 className="text-xl font-semibold text-green-800 mb-2">Success!</h2>
-              <p className="text-gray-700">{response.message}</p>
+            <div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border-l-4 border-green-500">
+              <div className="flex items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 className="text-xl font-semibold text-green-700">Success!</h2>
+              </div>
+              <p className="text-gray-700 mb-4">{response.message}</p>
               {response.coupon && (
-                <div className="mt-4 p-4 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg">
-                  <p className="text-sm text-gray-500">Your coupon code:</p>
-                  <p className="text-2xl font-bold text-gray-800">{response.coupon.code}</p>
+                <div className="mt-4 p-4 bg-green-50 border-2 border-dashed border-green-200 rounded-lg">
+                  <p className="text-sm text-gray-600">Your coupon code:</p>
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="text-2xl font-bold text-gray-800">{response.coupon.code}</p>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(response.coupon.code);
+                        alert('Coupon code copied to clipboard!');
+                      }}
+                      className="ml-2 p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                      title="Copy to clipboard"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
           )}
           
           {error && (
-            <div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border border-red-200">
-              <h2 className="text-xl font-semibold text-red-800 mb-2">Unable to claim</h2>
-              <p className="text-red-700">{error}</p>
+            <div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border-l-4 border-red-500">
+              <div className="flex items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 className="text-xl font-semibold text-red-700">Unable to claim</h2>
+              </div>
+              <p className="text-red-600">{error}</p>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Footer */}
+    {/* Feature Sections */}
+        <div className="container mx-auto px-4 py-16">
+          
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* How It Works Section */}
+            <div className="bg-gray-200 rounded-lg p-8 shadow-sm">
+            <h2 className="text-2xl font-bold mb-6">How It Works</h2>
+            <p className="text-gray-700 mb-6">
+              Our system employs a unique round-robin method to ensure fair distribution of coupons among users. 
+              Sign up, browse available coupons, and claim your favorites with ease.
+            </p>
+            <div className="flex justify-center">
+              <img 
+                src="https://qik-chat.com/wp-content/uploads/2023/03/lead-Distribution-round-robin-1024x533.jpg" 
+                alt="How It Works" 
+                className="rounded-lg h-64 w-120 object-cover" 
+              />
+            </div>
+            </div>
+
+            {/* Benefits Section */}
+            <div className="bg-gray-200 rounded-lg p-8 shadow-sm">
+            <h2 className="text-2xl font-bold mb-6">Benefits</h2>
+            <ul className="list-disc list-inside space-y-2 mb-6">
+              <li className="text-gray-700">Fair distribution of coupons</li>
+              <li className="text-gray-700">Easy to use interface</li>
+              <li className="text-gray-700">Wide variety of coupons</li>
+            </ul>
+            <div className="flex justify-center">
+              <img 
+                src="https://cdn.prod.website-files.com/6482fc3c808f4e9db58cda1d/66ed3b58eb3231340bda8811_657ac82ba7f1d4bb9c155c43_round_robin_sales_4x.webp" 
+                alt="Benefits" 
+                className="rounded-lg h-64 w-120 object-cover" 
+              />
+            </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        {/* Footer */}
       <div className="bg-white py-10 mt-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
