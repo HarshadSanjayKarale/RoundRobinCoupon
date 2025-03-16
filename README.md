@@ -20,8 +20,13 @@ This system ensures fair and controlled coupon distribution by assigning coupons
 ![Application Screenshot](Demo/image.png)
 
 
-### Demo Video
-[Watch Demo Video](https://drive.google.com/file/d/1L90nPGG6Gevr4GYy8ut-4io0YRv0QCBj/view?usp=sharing)
+## 📹 Demo Video
+<div align="center">
+  <a href="https://drive.google.com/file/d/1L90nPGG6Gevr4GYy8ut-4io0YRv0QCBj/view?usp=sharing">
+    <img src="Demo/video-thumbnail.png" alt="Demo Video Thumbnail" width="600px" style="border: 2px solid #4CAF50; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <p><strong>🎬 Watch the Full Demo Video</strong></p>
+  </a>
+</div>
 
 ## ✅ Tech Stack Used
 
