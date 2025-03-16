@@ -13,12 +13,33 @@ const ClaimHistory = () => {
   const fetchHistory = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('https://roundrobincoupon.onrender.com/user-history', {
-        withCredentials: true
+      
+      // Use the SAME key as in Home.jsx - 'couponSessionId'
+      const sessionId = localStorage.getItem('couponSessionId');
+      
+      console.log('Fetching history with sessionId:', sessionId);
+      
+      // Use different approaches for sending the sessionId
+      let url = 'https://roundrobincoupon.onrender.com/user-history';
+      
+      // If we have a sessionId in localStorage, append it as a query parameter
+      if (sessionId) {
+        url += `?sessionId=${encodeURIComponent(sessionId)}`;
+      }
+      
+      const res = await axios.get(url, {
+        withCredentials: true,
+        headers: {
+          // Also send it as a custom header as fallback
+          'X-Session-ID': sessionId || ''
+        }
       });
+      
+      console.log('Server response:', res.data);
       setHistory(res.data.history || []);
       setError(null);
     } catch (err) {
+      console.error('Error fetching history:', err);
       setError('Failed to fetch claim history');
       setHistory([]);
     } finally {
