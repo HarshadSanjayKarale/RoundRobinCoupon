@@ -175,11 +175,18 @@ def claim_coupon():
 
 @app.route('/user-history', methods=['GET'])
 def user_history():
-    ip_address = get_client_ip()
+    session_id = get_session_id()
     
-    # Find all claims by this user (by IP only, not by session)
+    if not session_id:
+        return jsonify({
+            'success': False,
+            'message': 'Session ID is required',
+            'history': []
+        }), 400
+    
+    # Find all claims by this session
     query = {
-        'ip_address': ip_address
+        'session_id': session_id
     }
     
     claims = list(claims_collection.find(query).sort('timestamp', -1))
@@ -198,6 +205,7 @@ def user_history():
         'success': True,
         'history': history
     })
+
 
 # Admin Endpoints
 @app.route('/admin/login', methods=['POST'])
