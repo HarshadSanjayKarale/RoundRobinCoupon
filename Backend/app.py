@@ -176,17 +176,11 @@ def claim_coupon():
 @app.route('/user-history', methods=['GET'])
 def user_history():
     ip_address = get_client_ip()
-    session_id = get_session_id()
     
-    # Find all claims by this user (by IP or session)
+    # Find all claims by this user (by IP only, not by session)
     query = {
-        '$or': [
-            {'ip_address': ip_address}
-        ]
+        'ip_address': ip_address
     }
-    
-    if session_id:
-        query['$or'].append({'session_id': session_id})
     
     claims = list(claims_collection.find(query).sort('timestamp', -1))
     
