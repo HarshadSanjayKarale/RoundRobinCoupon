@@ -172,10 +172,24 @@ def claim_coupon():
         response.set_cookie('session_id', session_id, httponly=True, samesite='Strict', secure=True)
     
     return response
-
 @app.route('/user-history', methods=['GET'])
 def user_history():
     session_id = get_session_id()
+    
+    # Debug information
+    print(f"Cookies received: {request.cookies}")
+    print(f"Session ID from cookie: {request.cookies.get('session_id')}")
+    print(f"Headers: {request.headers}")
+    
+    # Add support for session ID in URL parameter for GET requests
+    if not session_id and request.args.get('sessionId'):
+        session_id = request.args.get('sessionId')
+        print(f"Using session ID from URL parameter: {session_id}")
+    
+    # Still no session ID, check if we have something in a different header
+    if not session_id and request.headers.get('X-Session-ID'):
+        session_id = request.headers.get('X-Session-ID')
+        print(f"Using session ID from X-Session-ID header: {session_id}")
     
     if not session_id:
         return jsonify({
